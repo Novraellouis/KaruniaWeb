@@ -4,9 +4,7 @@
             <table class="table align-middle">
                 <thead class="table-light text-muted">
                     <tr>
-                        <th>No</th>
-                        <th>No Kamar</th>
-                        <th>Fasilitas</th>
+                        <th>Kamar</th>
                         <th>Tamu</th>
                         <th>Harga</th>
                         <th>Stok</th>
@@ -16,9 +14,7 @@
                 <tbody>
                     @foreach ($hotel as $item)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->category }}</td>
                             <td>{{ $item->room }}</td>
                             <td>{{ $item->price }}</td>
                             <td>{{ $item->stock }}</td>

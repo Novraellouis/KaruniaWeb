@@ -11,8 +11,8 @@
             <table class="table align-middle">
                 <thead class="table-light text-muted">
                     <tr>
-                        <th>No</th>
-                        <th>Id Kas</th>
+                        <!-- <th>No</th>
+                        <th>Id Kas</th> -->
                         <th>Tanggal Penerimaan</th>
                         <th>Jumlah</th>
                         <th>Sumber Kas</th>
@@ -26,8 +26,8 @@
                     @endphp
                     @foreach ($kas as $item)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->id }}</td>
+                            <!-- <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->id }}</td> -->
                             <td>{{ $item->inout_date }}</td>
                             <td>Rp. {{ number_format($item->amount, 0, ',', '.') }}</td>
                             <td>{{ $item->transaction_type }}</td>

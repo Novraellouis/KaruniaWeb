@@ -33,7 +33,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm">
+                            <!-- <div class="col-sm">
                                 <div class="d-flex justify-content-sm-end">
                                     <div class="search-box ms-2">
                                         <form id="content_filter">
@@ -43,7 +43,7 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div id="list_result"></div>

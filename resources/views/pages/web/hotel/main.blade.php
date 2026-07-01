@@ -56,7 +56,7 @@
 
                                     <div class="room-price">
                                         <span class="current">Rp
-                                            {{ number_format($item->price) }}</span>
+                                            {{ $item->price }}</span>
                                         <span class="per-night">Per night</span>
                                     </div>
 

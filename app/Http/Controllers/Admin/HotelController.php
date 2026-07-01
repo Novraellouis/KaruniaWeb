@@ -17,10 +17,12 @@ class HotelController extends Controller
                 ->orWhere('price', 'like', '%' . $request->keyword . '%')
                 ->orWhere('stock', 'like', '%' . $request->keyword . '%')
                 ->orWhere('category', 'like', '%' . $request->keyword . '%')
-                ->orWhere('room', 'like', '%' . $request->keyword . '$')
+                ->orWhere('room', 'like', '%' . $request->keyword . '%')
                 ->paginate(10);
+
             return view('pages.admin.hotel.list', compact('hotel'));
         }
+
         return view('pages.admin.hotel.main');
     }
 
@@ -36,7 +38,7 @@ class HotelController extends Controller
             'category' => 'required|string|max:255',
             'description' => 'required|string',
             'room' => 'required|string|max:255',
-            'price' => 'required|numeric',
+            'price' => 'required|integer',
             'stock' => 'required|integer',
             'cover' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -49,8 +51,11 @@ class HotelController extends Controller
         }
 
         $file = $request->file('cover');
-        $filename = $file->getClientOriginalName();
-        $file->move('images/hotel', $filename);
+
+        // Membuat nama file unik
+        $filename = time() . '_' . $file->getClientOriginalName();
+
+        $file->move(public_path('images/hotel'), $filename);
 
         Hotel::create([
             'name' => $request->name,
@@ -85,10 +90,10 @@ class HotelController extends Controller
             'name' => 'required|string|max:255',
             'category' => 'required|string|max:255',
             'description' => 'required|string',
-            'room' => 'required|string',
+            'room' => 'required|string|max:255',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
-            'cover' => 'required|image|mimes:jpeg,png,jpg,gif,svg|',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($validators->fails()) {
@@ -98,14 +103,24 @@ class HotelController extends Controller
             ]);
         }
 
+        // Default menggunakan cover lama
+        $filename = $hotel->cover;
+
+        // Jika ada upload cover baru
         if ($request->hasFile('cover')) {
-            $old_file = public_path('images/hotel/' . $hotel->cover);
-            if (file_exists($old_file)) {
-                unlink($old_file);
+
+            // Hapus file lama jika ada
+            $oldFile = public_path('images/hotel/' . $hotel->cover);
+
+            if (!empty($hotel->cover) && file_exists($oldFile)) {
+                unlink($oldFile);
             }
+
+            // Simpan file baru
             $file = $request->file('cover');
-            $filename = $file->getClientOriginalName();
-            $file->move('images/hotel', $filename);
+            $filename = time() . '_' . $file->getClientOriginalName();
+
+            $file->move(public_path('images/hotel'), $filename);
         }
 
         $hotel->update([
@@ -128,7 +143,8 @@ class HotelController extends Controller
     public function destroy(Hotel $hotel)
     {
         $file = public_path('images/hotel/' . $hotel->cover);
-        if (file_exists($file)) {
+
+        if (!empty($hotel->cover) && file_exists($file)) {
             unlink($file);
         }
 

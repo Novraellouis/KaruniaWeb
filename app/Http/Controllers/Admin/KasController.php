@@ -38,25 +38,41 @@ class KasController extends Controller
         return view('pages.admin.kas.main');
     }
 
-    public function pdf(Request $request)
-    {
-        if ($request->start_date == null || $request->end_date == null) {
-            return redirect()->back()->with('error', 'Tanggal tidak boleh kosong');
-        }
-
-        // Konversi tanggal string menjadi objek Carbon
-        $startDate = Carbon::parse($request->start_date)->startOfDay();
-        $endDate = Carbon::parse($request->end_date)->endOfDay();
-
-        $kas = Kas::whereBetween('created_at', [$startDate, $endDate])
-            ->orderBy('created_at', 'DESC')
-            ->get();
-
-        $pdf = PDF::loadView('pages.admin.kas.pdf', compact('kas', 'startDate', 'endDate'));
-        $fileName = 'kas_' . $startDate->translatedFormat('d_F_Y') . '_to_' . $endDate->translatedFormat('d_F_Y') . '.pdf';
-
-        return $pdf->download($fileName);
+public function pdf(Request $request)
+{
+    if (!$request->start_date || !$request->end_date) {
+        return redirect()->back()->with('error', 'Tanggal tidak boleh kosong');
     }
+
+    $startDate = Carbon::parse($request->start_date)
+    ->locale('id')
+    ->startOfDay();
+
+$endDate = Carbon::parse($request->end_date)
+    ->locale('id')
+    ->endOfDay();
+
+    $kas = Kas::whereBetween('inout_date', [$startDate, $endDate])
+        ->orderBy('inout_date', 'DESC')
+        ->get();
+    if ($kas->isEmpty()) {
+        return redirect()->back()
+            ->with('error', 'Tidak ada data pada rentang tanggal tersebut.');
+    }
+
+    $pdf = PDF::loadView(
+        'pages.admin.kas.pdf',
+        compact('kas', 'startDate', 'endDate')
+    );
+
+    $fileName = 'kas_' .
+        $startDate->translatedFormat('d_F_Y') .
+        '_to_' .
+        $endDate->translatedFormat('d_F_Y') .
+        '.pdf';
+
+    return $pdf->download($fileName);
+}
 
     public function store(Request $request)
     {

@@ -11,19 +11,19 @@
             <div class="card">
                 <div class="card-header border-0">
                     <div class="row g-4">
-                        <div class="col-sm justify-content-sm-start">
+                        <!-- <div class="col-sm justify-content-sm-start">
                             <a href="{{ route('admin.order.pdf') }}" class="btn btn-md btn-info me-2 col-md-2"
                                 target="_blank" class="menu-link px-3">Cetak</a>
-                        </div>
+                        </div> -->
                         <div class="col-sm">
                             <div class="d-flex justify-content-sm-end">
-                                <div class="search-box ms-2">
+                                <!-- <div class="search-box ms-2">
                                     <form id="content_filter">
                                         <input type="text" name="keyword" onkeyup="load_list(1);"
                                             class="form-control" placeholder="Cari Data Pesanan...">
                                         <i class="ri-search-line search-icon"></i>
                                     </form>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

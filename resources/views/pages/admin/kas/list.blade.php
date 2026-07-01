@@ -11,13 +11,11 @@
             <table class="table align-middle">
                 <thead class="table-light text-muted">
                     <tr>
-                        <th>No</th>
-                        <th>Id Kas</th>
+                        <!-- <th>Id Kas</th> -->
                         <th>Tanggal Penerimaan</th>
                         <th>Kas Keluar/Masuk</th>
                         <th>Jumlah</th>
                         <th>Sumber Kas</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,25 +25,24 @@
                     @endphp
                     @foreach ($kas as $item)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->id }}</td>
+                            <!-- <td>{{ $item->id }}</td> -->
                             <td>{{ $item->inout_date }}</td>
                             <td>Rp. {{ number_format($item->amount, 0, ',', '.') }}</td>
                             <td>{{ $item->transaction_type }}</td>
                             <td>
                                 @if ($item->in_out === 'in')
-                                    <button class="btn btn-success">MASUK</button>
+                                    Masuk
                                     @php
                                         $totalIn += $item->amount;
                                     @endphp
                                 @elseif ($item->in_out === 'out')
-                                    <button class="btn btn-danger">KELUAR</button>
+                                    Keluar
                                     @php
                                         $totalOut += $item->amount;
                                     @endphp
                                 @endif
                             </td>
-                            <td>
+                            <!-- <td>
                                 <ul class="list-inline hstack gap-2 mb-0">
                                     <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
                                         data-bs-placement="top" title="" data-bs-original-title="Remove">
@@ -57,7 +54,7 @@
                                     </li>
                                 </ul>
 
-                            </td>
+                            </td> -->
                         </tr>
                     @endforeach
                 </tbody>

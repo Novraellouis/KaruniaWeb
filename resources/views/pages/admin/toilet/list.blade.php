@@ -4,8 +4,7 @@
             <table class="table align-middle">
                 <thead class="table-light text-muted">
                     <tr>
-                        <th>No</th>
-                        <th>No Kamar</th>
+                        <th>Nama Pemandian</th>
                         <th>Harga</th>
                         <th>Stok</th>
                         <th>Aksi</th>
@@ -14,7 +13,6 @@
                 <tbody class="list form-check-all">
                     @foreach ($toilet as $item)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->title }}</td>
                             {{-- <td>{{$item->category}}</td> --}}
                             <td>{{ $item->price }}</td>

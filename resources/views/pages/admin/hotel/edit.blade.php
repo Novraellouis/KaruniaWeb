@@ -21,13 +21,11 @@
                                             <input class="form-control" type="text" placeholder="Hotel Name"
                                                 name="name" value="{{ $hotel->name }}" />
                                         </div>
-                                        <div class="mb-3">
-                                            <label class="form-label-title">Categori</label>
-                                            <select name="category" class="form-select">
-                                                <option disabled selected>Pilih Fasilitas</option>
-                                                <option value="Free Wifi dan TV">Free Wifi dan TV</option>
-                                            </select>
-                                        </div>
+<div class="mb-3">
+    <label class="form-label-title">Category</label>
+    <input type="text" class="form-control" value="Free Wifi dan TV" readonly>
+    <input type="hidden" name="category" value="Free Wifi dan TV">
+</div>
 
                                         <div class="mb-3">
                                             <label class="form-label-title">Room</label>
@@ -49,6 +47,13 @@
                                         
                                         <div class="mb-3">
                                             <label class="form-label-title mt-4">Cover</label>
+                                            <br>
+                                                @if ($hotel->cover)
+                                                    <img src="{{ asset('images/hotel/' . $hotel->cover) }}"
+                                                        alt="Cover"
+                                                        width="200"
+                                                        class="img-thumbnail mb-3">
+                                                @endif
                                             <input class="form-control" type="file" name="cover" />
                                         </div>
 
@@ -63,7 +68,7 @@
                                 </div>
                                 <div class="card-footer text-end">
                                     <button class="btn btn-primary me-3" type="submit">Submit</button>
-                                    <button class="btn btn-outline-primary" type="button">Cancel</button>
+                                    <button class="btn btn-outline-primary" type="button" onclick="window.location.href='{{ route('admin.hotel.index') }}'" >Cancel</button>
                                 </div>
                             </div>
                             <!--Hotel detail end-->

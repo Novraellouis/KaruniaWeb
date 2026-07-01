@@ -33,7 +33,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm">
+                            <!-- <div class="col-sm">
                                 <div class="d-flex justify-content-sm-end">
                                     <div class="search-box ms-2">
                                         <form id="content_filter">
@@ -43,7 +43,7 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div id="list_result"></div>
@@ -60,8 +60,10 @@
                     const startDate = document.getElementById('start_date').value;
                     const endDate = document.getElementById('end_date').value;
 
-                    window.open(`{{ route('admin.kas.pdf') }}?start_date=${startDate}&end_date=${endDate}`,
-                        '_blank');
+                    window.open(
+`{{ route('admin.kas.pdf') }}?start_date=${startDate}&end_date=${endDate}`,
+'_blank'
+);
                 }
             </script>
             <script>

@@ -47,6 +47,13 @@
 
                                         <div class="mb-3">
                                             <label class="form-label-title mt-4">Gambar</label>
+                                                <br>
+                                                @if ($food->cover)
+                                                    <img src="{{ asset('images/food/' . $food->cover) }}"
+                                                        alt="Cover"
+                                                        width="200"
+                                                        class="img-thumbnail mb-3">
+                                                @endif
                                             <input class="form-control" type="file" name="cover" />
                                         </div>
 
@@ -60,7 +67,7 @@
                                 </div>
                                 <div class="card-footer text-end">
                                     <button class="btn btn-primary me-3" type="submit">Edit</button>
-                                    <button class="btn btn-outline-primary" type="button">Cancel</button>
+                                    <button class="btn btn-outline-primary" type="button" onclick="window.location.href='{{ route('admin.food.index') }}'" >Cancel</button>
                                 </div>
                             </div>
                             <!--Hotel detail end-->

@@ -46,7 +46,7 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('admin.food.index') }}" role="button"
                             aria-expanded="false" aria-controls="sidebarDashboards">
-                            <i class="ri-book-line"></i> <span data-key="t-books">Restaurant</span>
+                            <i class="ri-book-line"></i> <span data-key="t-books">Menu</span>
                         </a>
                     </li>
                     <li class="nav-item">

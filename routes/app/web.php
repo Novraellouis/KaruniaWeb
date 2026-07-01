@@ -13,6 +13,9 @@ use App\Http\Controllers\Web\KritikSaranController;
 
 Route::group(['domain' => ''], function () {
     Route::get('auth', [AuthController::class, 'index'])->name('auth.index');
+    Route::get('auth/google/redirect', [AuthController::class, 'redirectToGoogle'])->name('auth.google.redirect');
+    Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
+    Route::post('auth/firebase', [AuthController::class, 'handleFirebaseAuth'])->name('auth.firebase');
     Route::post('auth/login', [AuthController::class, 'do_login'])->name('auth.login');
     Route::get('auth/register', [AuthController::class, 'register'])->name('register');
     Route::post('auth/register', [AuthController::class, 'do_register'])->name('auth.register');
